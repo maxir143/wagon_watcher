@@ -2,12 +2,17 @@ import os
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 from gtts import gTTS
 from playsound import playsound
 
 
 def main():
+    def create_web_driver():
+        driver = webdriver.Chrome()
+        driver.set_window_position(0, 0)
+        driver.set_window_size(800, 600)  # Opcional
+        return driver
+
     def login(driver, user, password):
         driver.get('https://tortops.com/')
         print(driver.title)
@@ -39,7 +44,7 @@ def main():
     def scraper_wagon_ids():
         USER = 'maximiliano.valentin@tortoise.dev'
         PASS = 'teleoperador'
-        browser = webdriver.Chrome(ChromeDriverManager().install())
+        browser = create_web_driver()
         login(browser, USER, PASS)
         request_wagon_id_list = get_vehicles_ids(browser)
         browser.quit()
