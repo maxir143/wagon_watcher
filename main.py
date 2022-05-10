@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from gtts import gTTS
-from playsound import playsound
+import pygame
 
 
 def main():
@@ -59,7 +59,11 @@ def main():
         speech = gTTS(text=message)
         speech.save(format_text)
         time.sleep(1)
-        playsound(format_text)
+        pygame.mixer.init()
+        sound = pygame.mixer.Sound(format_text)
+        playing = sound.play()
+        while playing.get_busy():
+            pygame.time.delay(100)
         time.sleep(1)
         os.remove(format_text)
 
