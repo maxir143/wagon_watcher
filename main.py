@@ -7,8 +7,6 @@ from playsound import playsound
 from pyvirtualdisplay import Display
 
 
-
-
 def create_web_driver():
     driver = webdriver.Chrome()
     driver.set_window_position(0, 0)
@@ -48,8 +46,6 @@ def new_vehicles(old_list, new_list):
 
 
 def scraper_wagon_ids():
-    display = Display(visible=0, size=(800, 600))
-    display.start()
     USER = 'maximiliano.valentin@tortoise.dev'
     PASS = 'teleoperador'
     browser = create_web_driver()
@@ -81,4 +77,7 @@ def start():
     time.sleep(5)
 
 
+display = Display(visible=0, size=(800, 600))
+display.start()
+time.sleep(3)
 print(scraper_wagon_ids())
