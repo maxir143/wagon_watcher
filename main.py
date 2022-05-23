@@ -76,9 +76,21 @@ def start():
     time.sleep(5)
 
 
-scraped_ids = scraper_wagon_ids()
+def save_ids():
+    scraped_ids = scraper_wagon_ids()
+    with open('wagons_ids.txt', 'w') as f:
+        for item in scraped_ids:
+            # write each item on a new line
+            f.write("%s\n" % item)
 
-with open('wagons_ids.txt', 'w') as f:
-    for item in scraped_ids:
-        # write each item on a new line
-        f.write("%s\n" % item)
+
+def read_ids():
+    saved_ids = []
+    with open(r'E:\demos\files_demos\account\sales.txt', 'r') as f:
+        for line in f:
+            x = line[:-1]
+            saved_ids.append(x)
+
+    return saved_ids
+
+print(read_ids())
