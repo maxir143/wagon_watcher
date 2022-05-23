@@ -14,13 +14,13 @@ def create_web_driver():
 
 
 def login(driver, user, password):
-    driver.get('https://tortops.com/')
+    driver.get('https://www.tortops.com/#/login')
     print(driver.title)
     time.sleep(3)
 
     user_input = driver.find_element(by=By.ID, value='mat-input-0')
     pass_input = driver.find_element(by=By.ID, value='mat-input-1')
-    submit_button = driver.find_element(by=By.XPATH, value='/html/body/app-root/app-layout/section/app-login/section/mat-card/mat-card-footer/button')
+    submit_button = driver.find_element(by=By.XPATH, value='/html/body/app-root/app-login/section/mat-card/mat-card-footer/button')
 
     user_input.send_keys(user)
     pass_input.send_keys(password)
@@ -31,13 +31,13 @@ def login(driver, user, password):
 
 
 def get_vehicles_ids(driver):
-    driver.get('https://tortops.com/#/vehiclesAdmin')
+    driver.get('https://www.tortops.com/#/vehiclesManagement')
     time.sleep(3)
 
-    wagon_info_cards = driver.find_elements(by=By.CLASS_NAME, value='vehiclesadmin-vehicle-div')
+    wagon_info_cards = driver.find_elements(by=By.CLASS_NAME, value='vehicleselector-item')
     time.sleep(1)
 
-    return [card.find_element(by=By.CLASS_NAME, value='vehiclesadmin-id-container').text for card in wagon_info_cards]
+    return [card.find_element(by=By.CLASS_NAME, value='vehicleselector-item-uid').text for card in wagon_info_cards]
 
 
 def new_vehicles(old_list, new_list):
@@ -74,3 +74,6 @@ def start():
     for wagon_id in new:
         text_to_speech(f'Wagon {wagon_id} connected')
     time.sleep(5)
+
+
+print(scraper_wagon_ids())
