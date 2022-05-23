@@ -3,10 +3,10 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from gtts import gTTS
-import pygame
+from playsound import playsound
 
 
-def main():
+def wagon_watcher():
     def create_web_driver():
         driver = webdriver.Chrome()
         driver.set_window_position(0, 0)
@@ -51,30 +51,21 @@ def main():
 
         return request_wagon_id_list
 
-    new_wagon_list = []
-    old_wagon_list = []
-
     def text_to_speech(message):
-        format_text = f'{message}.mp3'
+        format_text = f'{message}.wav'
         speech = gTTS(text=message)
         speech.save(format_text)
         time.sleep(1)
-        pygame.mixer.init()
-        sound = pygame.mixer.Sound(format_text)
-        playing = sound.play()
-        while playing.get_busy():
-            pygame.time.delay(100)
+        playsound(format_text)
         time.sleep(1)
         os.remove(format_text)
 
-    while True:
+    def start():
+        new_wagon_list = []
+        old_wagon_list = []
         new_wagon_list = scraper_wagon_ids()
         new = new_vehicles(old_wagon_list, new_wagon_list)
         old_wagon_list = new_wagon_list
-        for id in new:
-            text_to_speech(f'Wagon {id} connected')
+        for wagon_id in new:
+            text_to_speech(f'Wagon {wagon_id} connected')
         time.sleep(5)
-
-
-if __name__ == '__main__':
-    main()
