@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from gtts import gTTS
 from playsound import playsound
+from pyvirtualdisplay import Display
 
 
 def create_web_driver():
@@ -76,4 +77,10 @@ def start():
     time.sleep(5)
 
 
-print(scraper_wagon_ids())
+display = Display(visible=0, size=(800, 600))
+display.start()
+time.sleep(3)
+scraped_ids = scraper_wagon_ids()
+
+with open('wagons_ids.txt', 'w') as f:
+    f.write(scraped_ids)
