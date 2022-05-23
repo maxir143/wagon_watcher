@@ -86,7 +86,7 @@ def save_ids():
 
 def read_ids():
     saved_ids = []
-    with open(r'E:\demos\files_demos\account\sales.txt', 'r') as f:
+    with open(r'wagons_ids.txt', 'r') as f:
         for line in f:
             x = line[:-1]
             saved_ids.append(x)
