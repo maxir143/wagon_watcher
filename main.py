@@ -4,6 +4,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from gtts import gTTS
 from playsound import playsound
+from pyvirtualdisplay import Display
+
+
 
 
 def create_web_driver():
@@ -45,6 +48,8 @@ def new_vehicles(old_list, new_list):
 
 
 def scraper_wagon_ids():
+    display = Display(visible=0, size=(800, 600))
+    display.start()
     USER = 'maximiliano.valentin@tortoise.dev'
     PASS = 'teleoperador'
     browser = create_web_driver()
