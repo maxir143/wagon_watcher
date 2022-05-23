@@ -79,4 +79,6 @@ def start():
 scraped_ids = scraper_wagon_ids()
 
 with open('wagons_ids.txt', 'w') as f:
-    f.write(scraped_ids)
+    for item in scraped_ids:
+        # write each item on a new line
+        f.write("%s\n" % item)
